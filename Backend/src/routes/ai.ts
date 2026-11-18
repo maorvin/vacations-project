@@ -40,7 +40,7 @@ async function generateWithFallback(prompt: string): Promise<string> {
 
 function sendAiError(res: Response, err: any, fallbackMessage: string) {
     if (err instanceof AiNotConfiguredError) {
-        return res.status(503).json({ error: 'פיצ\'רי ה-AI לא מוגדרים בשרת (חסר GEMINI_API_KEY ב-backend/.env).' });
+        return res.status(503).json({ error: 'פיצ\'רי ה-AI לא מוגדרים בשרת (חסר GEMINI_API_KEY ב-Backend/.env).' });
     }
     if (err?.status === 429) {
         return res.status(429).json({ error: 'נגמרה המכסה של מפתח ה-AI. נסה שוב מאוחר יותר.' });

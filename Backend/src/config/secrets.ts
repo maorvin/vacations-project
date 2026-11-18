@@ -12,7 +12,7 @@ function resolveJwtSecret(): string {
 
     console.warn(
         '[security] JWT_SECRET is not set. Using a random secret for this run; ' +
-        'users will need to log in again after a restart. Set JWT_SECRET in backend/.env to keep sessions.'
+        'users will need to log in again after a restart. Set JWT_SECRET in Backend/.env to keep sessions.'
     );
     return crypto.randomBytes(48).toString('hex');
 }
@@ -23,5 +23,5 @@ export const JWT_SECRET = resolveJwtSecret();
 export const GEMINI_API_KEY = process.env.GEMINI_API_KEY?.trim() || '';
 
 if (!GEMINI_API_KEY) {
-    console.warn('[ai] GEMINI_API_KEY is not set. AI features will return an error until it is added to backend/.env.');
+    console.warn('[ai] GEMINI_API_KEY is not set. AI features will return an error until it is added to Backend/.env.');
 }

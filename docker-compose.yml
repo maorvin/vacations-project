@@ -3,7 +3,7 @@
 #   שרת:            http://localhost:5001
 #   מסד נתונים:     localhost:5432  (משתמש vacations / סיסמה vacations, מסד vacations)
 #
-# בהפעלה הראשונה PostgreSQL יוצר את הטבלאות וטוען את הנתונים מ-database/init.
+# בהפעלה הראשונה PostgreSQL יוצר את הטבלאות וטוען את הנתונים מ-Database/init.
 # הנתונים נשמרים ב-volume, כך שהם לא נמחקים בין הפעלות.
 # כדי להתחיל מחדש עם הנתונים ההתחלתיים:  docker compose down -v
 
@@ -20,7 +20,7 @@ services:
       - "${DB_PORT:-5432}:5432"
     volumes:
       - pgdata:/var/lib/postgresql
-      - ./database/init:/docker-entrypoint-initdb.d:ro
+      - ./Database/init:/docker-entrypoint-initdb.d:ro
     restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U vacations -d vacations"]
@@ -29,13 +29,13 @@ services:
       retries: 10
 
   backend:
-    build: ./backend
+    build: ./Backend
     container_name: vacations-backend
-    # JWT_SECRET ו-GEMINI_API_KEY נקראים מ-backend/.env (לא נשמר ב-git ולא נכנס לאימג').
+    # JWT_SECRET ו-GEMINI_API_KEY נקראים מ-Backend/.env (לא נשמר ב-git ולא נכנס לאימג').
     # הקובץ אופציונלי: בלעדיו המערכת עולה עם מפתח JWT אקראי ובלי פיצ'רי AI.
-    # תבנית: backend/.env.example
+    # תבנית: Backend/.env.example
     env_file:
-      - path: ./backend/.env
+      - path: ./Backend/.env
         required: false
     environment:
       PORT: 5001
@@ -56,7 +56,7 @@ services:
       start_period: 10s
 
   frontend:
-    build: ./frontend
+    build: ./Frontend
     container_name: vacations-frontend
     ports:
       - "${FRONTEND_PORT:-3000}:80"

@@ -19,7 +19,7 @@ docker compose up -d --build
 | השרת (API) | http://localhost:5001 |
 | מסד הנתונים (PostgreSQL) | `localhost:5432`, משתמש, סיסמה ושם מסד: `vacations` |
 
-בהפעלה הראשונה מסד הנתונים נוצר אוטומטית עם הטבלאות ועם נתוני התחלה, מתוך [database/init](database/init).
+בהפעלה הראשונה מסד הנתונים נוצר אוטומטית עם הטבלאות ועם נתוני התחלה, מתוך [Database/init](Database/init).
 
 ### משתמשי דמו
 
@@ -38,15 +38,27 @@ docker compose down              # עצירה (הנתונים נשמרים)
 docker compose down -v           # עצירה ומחיקת הנתונים (בהפעלה הבאה ייטענו שוב נתוני ההתחלה)
 ```
 
+### בדיקת השרת ב-Postman
+
+מייבאים ב-Postman את [Backend/Vacations-API.postman_collection.json](Backend/Vacations-API.postman_collection.json) ומריצים לפי הסדר.
+בקשות ההתחברות שומרות את הטוקן אוטומטית, ושאר הבקשות משתמשות בו.
+
+### ייבוא מסד הנתונים בלי Docker
+
+```bash
+createdb vacations
+psql -d vacations -f Database/vacations_db_export.sql
+```
+
 ## מפתחות (אופציונלי)
 
 המערכת עולה גם בלי קובץ מפתחות. כדי להפעיל את פיצ'רי ה-AI ולשמור על התחברות גם אחרי הפעלה מחדש של השרת:
 
 ```bash
-cp backend/.env.example backend/.env
+cp Backend/.env.example Backend/.env
 ```
 
-ולמלא בקובץ `backend/.env`:
+ולמלא בקובץ `Backend/.env`:
 
 - `GEMINI_API_KEY`: מפתח ל-Gemini, מ-https://aistudio.google.com/apikey. בלעדיו כל המערכת עובדת חוץ מהמלצות ה-AI והשאלות על החופשות.
 - `JWT_SECRET`: מחרוזת אקראית ארוכה. בלעדיו השרת יוצר מפתח אקראי בכל הפעלה, והמשתמשים יצטרכו להתחבר מחדש אחרי כל הפעלה מחדש.
@@ -82,13 +94,16 @@ cp backend/.env.example backend/.env
 
 ```
 ├── docker-compose.yml       הרצת כל המערכת
-├── database/init/           יצירת הטבלאות ונתוני התחלה
-├── backend/                 שרת Express + TypeScript
+├── Database/
+│   ├── init/                    יצירת הטבלאות ונתוני התחלה (רץ אוטומטית בדוקר)
+│   └── vacations_db_export.sql  ייצוא מלא של מסד הנתונים (pg_dump)
+├── Backend/                 שרת Express + TypeScript
+│   ├── Vacations-API.postman_collection.json   מסמך Postman עם כל הנתיבים
 │   └── src/
 │       ├── config/          חיבור למסד הנתונים ומפתחות
 │       ├── middleware/      אימות משתמש ובדיקת הרשאות מנהל
 │       └── routes/          הרשמה והתחברות, חופשות ולייקים, AI
-└── frontend/                אתר React
+└── Frontend/                אתר React
     └── src/
         ├── components/      דפים ורכיבים
         └── services/        קריאות לשרת וניהול המשתמש המחובר
@@ -96,11 +111,11 @@ cp backend/.env.example backend/.env
 
 ## הרצה מקומית בלי Docker (לפיתוח)
 
-צריך Node.js 22 ומסד PostgreSQL. ב-`backend/.env` מגדירים את `DATABASE_URL` לכתובת המסד.
+צריך Node.js 22 ומסד PostgreSQL. ב-`Backend/.env` מגדירים את `DATABASE_URL` לכתובת המסד.
 
 ```bash
-cd backend && npm install && npm run dev     # שרת על פורט 5001
-cd frontend && npm install && npm run dev    # אתר על http://localhost:5173
+cd Backend && npm install && npm run dev     # שרת על פורט 5001
+cd Frontend && npm install && npm run dev    # אתר על http://localhost:5173
 ```
 
 ## מפתח
