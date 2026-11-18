@@ -1,0 +1,220 @@
+.about {
+  direction: rtl;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 20px 80px;
+  color: #222;
+}
+
+/* פתיח */
+.about__hero {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 56px;
+}
+
+.about__eyebrow {
+  display: inline-block;
+  padding: 4px 14px;
+  margin-bottom: 14px;
+  border-radius: 999px;
+  background: #e8f5f3;
+  color: #00796b;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.about__title {
+  margin: 0 0 14px;
+  font-size: 2.6rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.about__lead {
+  margin: 0;
+  color: #555;
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.about__cta {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.about__btn {
+  padding: 11px 26px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 30px;
+  background: #fff;
+  color: #333;
+  font-weight: 700;
+  text-decoration: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.about__btn:hover {
+  border-color: #009688;
+}
+
+.about__btn--primary {
+  background: #009688;
+  border-color: #009688;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 150, 136, 0.3);
+}
+
+.about__btn--primary:hover {
+  background: #00796b;
+}
+
+/* סעיפים */
+.about__section {
+  margin-bottom: 48px;
+}
+
+.about__h2 {
+  margin: 0 0 20px;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.about__features {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 900px) {
+  .about__features {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .about__features {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .about__title {
+    font-size: 2rem;
+  }
+}
+
+.about__feature {
+  padding: 22px;
+  border: 1px solid #eaeaea;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+.about__feature-icon {
+  font-size: 1.8rem;
+}
+
+.about__feature h3 {
+  margin: 10px 0 6px;
+  font-size: 1.1rem;
+}
+
+.about__feature p {
+  margin: 0;
+  color: #666;
+  line-height: 1.6;
+}
+
+.about__tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.about__tech li {
+  padding: 8px 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 999px;
+  background: #fff;
+  font-weight: 600;
+  color: #444;
+}
+
+/* כרטיס המתכנת/ת */
+.about__dev {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  padding: 28px;
+  border: 1px solid #eaeaea;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #ffffff 0%, #f1faf8 100%);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+}
+
+@media (max-width: 560px) {
+  .about__dev {
+    flex-direction: column;
+  }
+}
+
+.about__dev-avatar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: #009688;
+  color: #fff;
+  font-size: 2.2rem;
+  font-weight: 800;
+}
+
+.about__dev-name {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.about__dev-role {
+  margin: 4px 0 12px;
+  color: #00796b;
+  font-weight: 700;
+}
+
+.about__dev-bio {
+  margin: 0 0 16px;
+  color: #555;
+  line-height: 1.7;
+}
+
+.about__dev-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.about__dev-links a {
+  display: inline-block;
+  padding: 7px 16px;
+  border: 1px solid #cfe9e5;
+  border-radius: 999px;
+  background: #fff;
+  color: #00796b;
+  font-weight: 600;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.about__dev-links a:hover {
+  border-color: #009688;
+}

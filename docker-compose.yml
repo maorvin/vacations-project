@@ -1,0 +1,69 @@
+# הרצת כל המערכת:  docker compose up -d --build
+#   אתר:            http://localhost:3000
+#   שרת:            http://localhost:5001
+#   מסד נתונים:     localhost:5432  (משתמש vacations / סיסמה vacations, מסד vacations)
+#
+# בהפעלה הראשונה PostgreSQL יוצר את הטבלאות וטוען את הנתונים מ-database/init.
+# הנתונים נשמרים ב-volume, כך שהם לא נמחקים בין הפעלות.
+# כדי להתחיל מחדש עם הנתונים ההתחלתיים:  docker compose down -v
+
+services:
+  db:
+    image: postgres:18-alpine
+    container_name: vacations-db
+    environment:
+      POSTGRES_USER: vacations
+      POSTGRES_PASSWORD: vacations
+      POSTGRES_DB: vacations
+      TZ: Asia/Jerusalem
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql
+      - ./database/init:/docker-entrypoint-initdb.d:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vacations -d vacations"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: ./backend
+    container_name: vacations-backend
+    # JWT_SECRET ו-GEMINI_API_KEY נקראים מ-backend/.env (לא נשמר ב-git ולא נכנס לאימג').
+    # הקובץ אופציונלי: בלעדיו המערכת עולה עם מפתח JWT אקראי ובלי פיצ'רי AI.
+    # תבנית: backend/.env.example
+    env_file:
+      - path: ./backend/.env
+        required: false
+    environment:
+      PORT: 5001
+      TZ: Asia/Jerusalem
+      # דורס את DATABASE_URL שב-.env (Neon) ומפנה לקונטיינר של מסד הנתונים
+      DATABASE_URL: postgres://vacations:vacations@db:5432/vacations
+    ports:
+      - "${BACKEND_PORT:-5001}:5001"
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:5001/api/test-db').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  frontend:
+    build: ./frontend
+    container_name: vacations-frontend
+    ports:
+      - "${FRONTEND_PORT:-3000}:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  pgdata:

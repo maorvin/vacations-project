@@ -1,0 +1,454 @@
+/* טופס הוספה / עריכה של חופשה (מנהל) */
+.avf-page {
+  --avf-teal: #009688;
+  --avf-teal-dark: #00796b;
+  --avf-teal-soft: #e8f5f3;
+  --avf-text: #222;
+  --avf-muted: #6b7280;
+  --avf-border: #e3e6ea;
+  --avf-danger: #d32f2f;
+  --avf-danger-soft: #fdecea;
+  --avf-warning: #b26a00;
+
+  direction: rtl;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 32px 20px 64px;
+  color: var(--avf-text);
+}
+
+/* כותרת הדף */
+.avf-header {
+  margin-bottom: 28px;
+}
+
+.avf-back {
+  background: none;
+  border: none;
+  padding: 4px 0;
+  margin-bottom: 14px;
+  color: var(--avf-muted);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.avf-back:hover {
+  color: var(--avf-teal);
+}
+
+.avf-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.avf-badge--new {
+  background: var(--avf-teal-soft);
+  color: var(--avf-teal-dark);
+}
+
+.avf-badge--edit {
+  background: #fff4e0;
+  color: var(--avf-warning);
+}
+
+.avf-title {
+  margin: 0 0 6px;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.avf-subtitle {
+  margin: 0;
+  color: var(--avf-muted);
+  font-size: 1rem;
+}
+
+/* הודעת שגיאה מהשרת */
+.avf-alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  background: var(--avf-danger-soft);
+  color: var(--avf-danger);
+  font-weight: 600;
+}
+
+/* פריסה: טופס + תצוגה מקדימה */
+.avf-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 32px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .avf-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.avf-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* כרטיסי סעיפים */
+.avf-section {
+  background: #fff;
+  border: 1px solid var(--avf-border);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+.avf-section__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 20px;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.avf-section__num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--avf-teal);
+  color: #fff;
+  font-size: 0.85rem;
+}
+
+/* שדות */
+.avf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+
+.avf-field:last-child {
+  margin-bottom: 0;
+}
+
+.avf-field label {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: #374151;
+}
+
+.avf-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.avf-field input,
+.avf-field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 14px;
+  border: 1.5px solid var(--avf-border);
+  border-radius: 10px;
+  background: #fafbfc;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--avf-text);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.avf-field textarea {
+  resize: vertical;
+  min-height: 110px;
+  line-height: 1.6;
+}
+
+.avf-field input:hover,
+.avf-field textarea:hover {
+  border-color: #c9ced5;
+}
+
+.avf-field input:focus,
+.avf-field textarea:focus {
+  outline: none;
+  background: #fff;
+  border-color: var(--avf-teal);
+  box-shadow: 0 0 0 3px rgba(0, 150, 136, 0.15);
+}
+
+.avf-field--error input,
+.avf-field--error textarea {
+  border-color: var(--avf-danger);
+  background: #fffafa;
+}
+
+.avf-field--error input:focus,
+.avf-field--error textarea:focus {
+  box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.15);
+}
+
+.avf-error {
+  color: var(--avf-danger);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.avf-warning {
+  color: var(--avf-warning);
+  font-size: 0.85rem;
+}
+
+.avf-hint {
+  margin: -6px 0 18px;
+  color: var(--avf-muted);
+  font-size: 0.88rem;
+}
+
+.avf-field .avf-hint {
+  margin: 0;
+}
+
+.avf-counter {
+  font-size: 0.8rem;
+  color: var(--avf-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.avf-counter--over {
+  color: var(--avf-danger);
+  font-weight: 700;
+}
+
+.avf-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 520px) {
+  .avf-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* שדה מחיר עם סימן $ */
+.avf-field--price {
+  max-width: 240px;
+}
+
+.avf-input-affix {
+  position: relative;
+}
+
+.avf-input-affix__symbol {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  transform: translateY(-50%);
+  color: var(--avf-muted);
+  font-weight: 700;
+  pointer-events: none;
+}
+
+.avf-input-affix input {
+  padding-left: 30px;
+  text-align: left;
+}
+
+/* כפתורים */
+.avf-actions {
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  display: flex;
+  justify-content: flex-start;
+  gap: 12px;
+  padding: 16px 0;
+  background: linear-gradient(to top, #fff 70%, rgba(255, 255, 255, 0));
+}
+
+.avf-btn {
+  padding: 12px 26px;
+  border-radius: 10px;
+  border: 1.5px solid transparent;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
+}
+
+.avf-btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.avf-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.avf-btn:focus-visible {
+  outline: 3px solid rgba(0, 150, 136, 0.35);
+  outline-offset: 2px;
+}
+
+.avf-btn--primary {
+  background: var(--avf-teal);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 150, 136, 0.3);
+}
+
+.avf-btn--primary:hover:not(:disabled) {
+  background: var(--avf-teal-dark);
+}
+
+.avf-btn--ghost {
+  background: #fff;
+  border-color: var(--avf-border);
+  color: #374151;
+}
+
+.avf-btn--ghost:hover:not(:disabled) {
+  border-color: #c9ced5;
+  background: #f7f8f9;
+}
+
+.avf-btn--danger {
+  background: var(--avf-danger);
+  color: #fff;
+}
+
+.avf-btn--danger:hover:not(:disabled) {
+  background: #b71c1c;
+}
+
+.avf-btn--danger-outline {
+  background: #fff;
+  border-color: #f1b5b5;
+  color: var(--avf-danger);
+}
+
+.avf-btn--danger-outline:hover:not(:disabled) {
+  background: var(--avf-danger-soft);
+  border-color: var(--avf-danger);
+}
+
+/* אזור מחיקה */
+.avf-danger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+  padding: 20px 24px;
+  border: 1.5px dashed #f1b5b5;
+  border-radius: 16px;
+  background: #fffafa;
+}
+
+.avf-danger__title {
+  margin: 0 0 4px;
+  font-size: 1rem;
+  color: var(--avf-danger);
+}
+
+.avf-danger__text {
+  margin: 0;
+  color: var(--avf-muted);
+  font-size: 0.88rem;
+}
+
+.avf-danger__confirm {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  color: var(--avf-danger);
+}
+
+/* תצוגה מקדימה */
+.avf-preview {
+  position: sticky;
+  top: 80px;
+}
+
+@media (max-width: 900px) {
+  .avf-preview {
+    position: static;
+    max-width: 380px;
+  }
+}
+
+.avf-preview__label {
+  margin: 0 0 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--avf-muted);
+}
+
+.avf-preview__card,
+.avf-preview__card:hover {
+  transform: none;
+}
+
+.avf-preview__card .card-description p {
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+
+/* טעינה */
+.avf-skeleton {
+  max-width: 640px;
+  padding: 32px;
+  background: #fff;
+  border: 1px solid var(--avf-border);
+  border-radius: 16px;
+}
+
+.avf-skeleton__line {
+  height: 16px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #f0f2f4 25%, #e6e9ec 50%, #f0f2f4 75%);
+  background-size: 200% 100%;
+  animation: avf-shimmer 1.4s ease-in-out infinite;
+}
+
+.avf-skeleton__line--title {
+  width: 50%;
+  height: 28px;
+}
+
+.avf-skeleton__line--short {
+  width: 35%;
+}
+
+@keyframes avf-shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .avf-skeleton__line {
+    animation: none;
+  }
+}

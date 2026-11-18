@@ -1,0 +1,147 @@
+/* תפריט עליון */
+.app-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 10px 20px;
+  background: #ffffff;
+  border-bottom: 1px solid #eaeaea;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  direction: rtl;
+}
+
+.app-nav__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.app-nav__user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-inline-start: auto;
+}
+
+.app-nav__name {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 260px;
+  font-weight: 700;
+  color: #222;
+}
+
+.app-nav__name-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-nav__avatar {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #009688;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+.app-nav__role {
+  flex-shrink: 0;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #fff4e0;
+  color: #b26a00;
+  font-size: 0.75rem;
+}
+
+.app-nav__logout {
+  padding: 7px 16px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 30px;
+  background: #fff;
+  color: #555;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.app-nav__logout:hover {
+  border-color: #d32f2f;
+  color: #d32f2f;
+}
+
+@media (max-width: 640px) {
+  .app-nav__user {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+.app-nav a {
+  padding: 8px 18px;
+  border-radius: 30px;
+  color: #555;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.app-nav a:hover {
+  color: #009688;
+  background: #e8f5f3;
+}
+
+.app-nav a.active {
+  background: #009688;
+  color: #ffffff;
+}
+
+/* כפתור מרחף עגול להמלצות AI */
+.ai-fab {
+  position: fixed;
+  bottom: 28px;
+  left: 28px;
+  z-index: 1001;
+  width: 60px;
+  height: 60px;
+  border: none;
+  border-radius: 50%;
+  background: #009688;
+  color: #ffffff;
+  font-size: 1.7rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(0, 150, 136, 0.45);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.ai-fab:hover {
+  transform: scale(1.1);
+  background: #00796b;
+}
+
+.ai-fab:active {
+  transform: scale(0.96);
+}
+
+.ai-fab:focus-visible {
+  outline: 3px solid #80cbc4;
+  outline-offset: 3px;
+}

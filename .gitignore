@@ -1,0 +1,12 @@
+# מפתחות וסודות: לעולם לא ל-git
+.env
+.env.*
+!.env.example
+
+# תלויות ותוצרי build
+node_modules/
+dist/
+
+# מערכת
+.DS_Store
+*.log

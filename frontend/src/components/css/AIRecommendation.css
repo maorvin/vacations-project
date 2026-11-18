@@ -1,0 +1,79 @@
+.ai-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  direction: ltr; /* או RTL לפי העדפתך, התאם במידת הצורך */
+  font-family: Arial, sans-serif;
+}
+
+.ai-container h1 {
+  text-align: center;
+  color: #009688;
+  margin-bottom: 25px;
+}
+
+.ai-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.ai-form label {
+  font-weight: bold;
+  color: #444;
+}
+
+.ai-form input {
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.ai-form button {
+  padding: 12px;
+  background-color: #009688;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.ai-form button:hover:not(:disabled) {
+  background-color: #00796b;
+}
+
+.ai-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ai-results {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  border-left: 5px solid #009688;
+  margin-top: 20px;
+  white-space: pre-line; /* שומר על ירידות שורה ומבנה טקסט מ-AI */
+}
+
+.ai-results h2 {
+  color: #333;
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+}
+
+.error-message {
+  color: #d32f2f;
+  background: #ffebee;
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
+}
